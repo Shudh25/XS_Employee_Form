@@ -3,21 +3,25 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
+	"gorm.io/gorm"
 )
 
 // Custom DATA TYPE STRUCTURE
+
 type Employee struct {
-	Id        string `json:"id"`
-	FullName  string `json:"FullName"`
-	Gender    string `json:"Gender"`
-	StartDate string `json:"StartDate"`
-	ToDate    string `json:"ToDate"`
-	Phone     string `json:"Phone"`
-	Resume    string `json:"Resume"`
-	Email     string `json:"Email"`
+	gorm.Model
+	Id       int       `json:"id" gorm:"primaryKey"`
+	Name     string    `json:"name"`
+	Gender   string    `json:"gender"`
+	FromDate time.Time `json:"from"`
+	ToDate   time.Time `json:"to"`
+	Phone    int64     `json:"phone"`
+	Resume   string    `json:"resume"`
+	Email    string    `json:"email"`
 }
 
 // For Routing the routes of SERVER
@@ -25,7 +29,8 @@ func routing() {
 	router := gin.Default()
 	router.Static("/assets", "./assets")
 
-	// router.POST("/sendData", POST)
+	router.GET("/", Start)
+	router.POST("/sendData", POST)
 	router.GET("/getData", GET)
 	router.Run("localhost:8080")
 }
