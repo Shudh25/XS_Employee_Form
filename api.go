@@ -42,3 +42,33 @@ func GET(c *gin.Context) {
 	// Prints the Json on page
 	c.IndentedJSON(http.StatusOK, Employee_details)
 }
+
+func POST(c *gin.Context) {
+	// Container for Storing all rows in Array
+	// var Employee_details = []Employee{}
+
+	var temp_emp Employee
+
+	if err := c.BindJSON(&temp_emp); err != nil {
+		return
+	}
+
+	//Database Connection
+	DB := db_connection()
+
+	/***********************************************/
+	/***********************************************/
+	/***********************************************/
+	// close database
+	// defer db.Close()
+
+	//delete  this
+	// Employee_details = append(Employee_details, temp_emp)
+	c.IndentedJSON(http.StatusCreated, temp_emp)
+
+	// insert
+	insertQry := `insert into "employee_details"("fname", "lname") values($1,$2)`
+	_, e := DB.Exec(insertQry, temp_emp.FullName, temp_emp.Gender)
+	CheckError(e)
+
+}

@@ -50,6 +50,11 @@ form {
     box-shadow: 0 0 3px 0 #669999;
 }
 
+.date {
+    display: inline-block;
+    width: 25%;
+}
+
 .banner {
     margin: 10px 0px;
 }
@@ -61,11 +66,16 @@ form {
     border-radius: 3px;
 }
 
-#mobile {
+#phone {
     width: 78.5%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
+}
+
+#phone:hover {
+    border: 1px solid blue;
+    box-shadow: 0 0 3px 0 #669999;
 }
 
 span {

@@ -5,17 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" media="screen and (max-width:700px)" href="phone.css">
-    <script data-ad-client="ca-pub-2568376866630709" async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <title>Xenonstack | Employee</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <form action="\">
+        <form id="employee_form" action="#">
             <div class="banner" align=center>
                 <h1>Employee Form</h1>
             </div>
@@ -25,47 +23,36 @@
                     <input type="text" class="inpt" id="fname" name="fname" required>
                 </div>
 
+                <!-- <div>
+                    <input type="radio" id="Male" name="gender">
+                    <label for="Male">Male</label>
+                </div> -->
+
                 <div class="item">
                     <label for="gender">Gender<span>*</span></label>
-                    <div>
-                        <input type="radio" id="Male" name="gender">
-                        <label for="Male">Male</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="female" name="gender">
-                        <label for="Female">Female</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="others" name="gender">
-                        <label for="Others">Others</label>
-                    </div>
-                </div>
-                <div class="item">
-                    <select id="SelectClass">
-                        <option value="">B.C.A</option>
-                        <option value="">B.B.A</option>
-                        <option value="">B.Arts</option>
-                        <option value="">B.Com</option>
-                        <option value="">B.Sc</option>
+                    <select id="gender" name="gender">
+                        <option value="Male">MALE</option>
+                        <option value="Female">FEMALE</option>
+                        <option value="Others">OTHERS</option>
                     </select>
                 </div>
+
                 <div class="item">
                     <label for="date" style="display: block;">Date<span>*</span></label>
-                    <input type="date" class="inpt" id="joindate" name="date" required
-                        style="display: inline-block;width: 25%;">
+                    <input type="date" class="inpt date" id="startDate" name="startDate">
                     <em>to</em>
-                    <input type="date" class="inpt" id="joindate" name="date" required
-                        style="display: inline-block;width: 25%;">
+                    <input type="date" class="inpt date" id="tillDate" name="tillDate">
                 </div>
 
                 <div class="item">
                     <label for="mobile">Mobile Number<span>*</span></label><br>
-                    <input type="text" value="+91" maxlength="4" id="noAdd91">
-                    <input type="tel" id="mobile" maxlength="10">
+                    <input type="tel" value="+91" maxlength="4" id="noAdd91" readonly>
+                    <input type="tel" id="phone" name="phone" maxlength="10">
                 </div>
 
                 <div class="item">
-                    Upload Certificate<span>*</span> <input type="file" class="inpt" id="mobile" name="" id="">
+                    Upload Resume<span>*</span>
+                    <input type="file" class="inpt" id="resume" name="resume">
                 </div>
 
                 <div class="item">
@@ -74,11 +61,14 @@
                 </div>
             </div>
 
+            <div id="error"></div>
+
             <div class="item" align="center">
-                <button type="submit" id="btn" href="/">Submit</button>
+                <button type="submit" id="btn">Submit</button>
             </div>
         </form>
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
