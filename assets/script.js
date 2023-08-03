@@ -53,5 +53,6 @@ form.addEventListener('submit', (e) => {
     if (error_messages.length > 0) {
         e.preventDefault()
         errorElement.innerText = error_messages.join(', ')
+        errorElement.style.height = "10px";
     }
 })

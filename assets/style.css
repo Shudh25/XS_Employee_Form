@@ -7,14 +7,14 @@
 
 body {
     background-image: url("img/bg1.jpg");
+    background-size: cover;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
 }
 
 .container {
     border: 2px solid rgb(73, 36, 236);
     background-color: white;
-    width: 40%;
+    width: 34%;
     margin: 39px auto;
     box-shadow: 0 0 20px #645d5d;
     border-radius: 22px;
@@ -24,13 +24,6 @@ body {
 form {
     width: 80%;
     margin: 20px auto;
-}
-
-#logo {
-    width: 33%;
-    background-color: white;
-    border: 1px solid grey;
-    border-radius: 15px;
 }
 
 .item {
@@ -52,7 +45,7 @@ form {
 
 .date {
     display: inline-block;
-    width: 25%;
+    width: 40%;
 }
 
 .banner {
@@ -82,6 +75,11 @@ span {
     color: red;
 }
 
+#error {
+    color: red;
+    font-size: 78%;
+}
+
 #SelectClass {
     width: 24%;
     padding: 5px;
@@ -94,18 +92,6 @@ span {
     box-shadow: 0 0 3px 0 #669999;
 }
 
-.declaration {
-    display: flex;
-    justify-content: space-evenly;
-    font-size: 15px;
-    margin-top: 15px;
-}
-
-.chkbox {
-    margin: 17px 8px;
-    width: 50px;
-    height: 18px;
-}
 
 #btn {
     border-radius: 8px;
