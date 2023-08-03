@@ -18,7 +18,16 @@ func Start(c *gin.Context) {
 }
 
 func GET(c *gin.Context) {
-
+	type Employee struct {
+		Id       int    `json:"id"`
+		Name     string `json:"name"`
+		Gender   string `json:"gender"`
+		FromDate string `json:"from"`
+		ToDate   string `json:"to"`
+		Phone    int64  `json:"phone"`
+		Resume   string `json:"resume"`
+		Email    string `json:"email"`
+	}
 	// Container for Storing all rows in Array
 	var Employee_details = []Employee{}
 
@@ -38,6 +47,9 @@ func GET(c *gin.Context) {
 		err := rows.Scan(&temp_emp.Id, &temp_emp.Name, &temp_emp.Gender, &temp_emp.FromDate,
 			&temp_emp.ToDate, &temp_emp.Phone, &temp_emp.Resume, &temp_emp.Email)
 
+		temp_emp.FromDate = strings.TrimRight(temp_emp.FromDate, "T00:00:00Z")
+		temp_emp.ToDate = strings.TrimRight(temp_emp.ToDate, "T00:00:00Z")
+
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -52,38 +64,6 @@ func GET(c *gin.Context) {
 	// Prints the Json on page
 	c.IndentedJSON(http.StatusOK, Employee_details)
 }
-
-// func POSTin(c *gin.Context) {
-// 	// Container for Storing all rows in Array
-// 	var Employee_details = []Employee{}
-
-// 	var temp_emp Employee
-
-// 	if err := c.BindJSON(&temp_emp); err != nil {
-// 		return
-// 	}
-
-// 	Employee_details = append(Employee_details, temp_emp)
-
-// 	//Database Connection
-// 	DB := db_connection()
-
-// 	/***********************************************/
-// 	/***********************************************/
-// 	/***********************************************/
-// 	// close database
-// 	defer DB.Close()
-
-// 	//delete  this
-// 	c.IndentedJSON(http.StatusCreated, Employee_details)
-
-// 	// insert
-// 	insertQry := `insert into "employee_details"("name", "gender") values($1,$2)`
-// 	_, e := DB.Exec(insertQry, temp_emp.FullName, temp_emp.Gender)
-// 	fmt.Printf(temp_emp.Gender)
-// 	CheckError(e)
-
-// }
 
 func POST(c *gin.Context) {
 	// Fname := c.PostForm("fname")
@@ -171,21 +151,11 @@ func POST(c *gin.Context) {
 	}
 
 	//DATABASE OPERATIONS
-	/************************************/
-	/************************************/
-	/************************************/
-	/************************************/
-	// DB.Create(&finalData)
-	c.JSON(201, gin.H{"message": "Details uploaded successfully", "Details": finalData})
 
-	// c.JSON(200, gin.H{
-	// 	"status":  "Submitted the form",
-	// 	"message": "whoo",
-	// 	"fname":   name,
-	// 	"gender":  gender,
-	// 	"email":   email,
-	// 	"Dt1":     from,
-	// 	"Dt":      to,
-	// 	"phone":   phone,
-	// })
+	DB := db_connection()
+	// insert
+	query := `insert into "employee_details"("name", "gender","start_date","till_date","phone","resume","email") values($1,$2,$3,$4,$5,$6,$7)`
+	_, e := DB.Exec(query, finalData.Name, finalData.Gender, finalData.FromDate, finalData.ToDate, finalData.Phone, finalData.Resume, finalData.Email)
+	CheckError(e)
+	c.JSON(201, gin.H{"message": "Details uploaded successfully", "Details": finalData})
 }
