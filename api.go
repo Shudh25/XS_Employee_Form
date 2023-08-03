@@ -22,8 +22,8 @@ func GET(c *gin.Context) {
 		Id       int    `json:"id"`
 		Name     string `json:"name"`
 		Gender   string `json:"gender"`
-		FromDate string `json:"from"`
-		ToDate   string `json:"to"`
+		FromDate string `json:"from_Date"`
+		ToDate   string `json:"to_Date"`
 		Phone    int64  `json:"phone"`
 		Resume   string `json:"resume"`
 		Email    string `json:"email"`
@@ -47,8 +47,9 @@ func GET(c *gin.Context) {
 		err := rows.Scan(&temp_emp.Id, &temp_emp.Name, &temp_emp.Gender, &temp_emp.FromDate,
 			&temp_emp.ToDate, &temp_emp.Phone, &temp_emp.Resume, &temp_emp.Email)
 
-		temp_emp.FromDate = strings.TrimRight(temp_emp.FromDate, "T00:00:00Z")
-		temp_emp.ToDate = strings.TrimRight(temp_emp.ToDate, "T00:00:00Z")
+		remove_str := "T00:00:00Z"
+		temp_emp.FromDate = strings.TrimRight(temp_emp.FromDate, remove_str)
+		temp_emp.ToDate = strings.TrimRight(temp_emp.ToDate, remove_str)
 
 		if err != nil {
 			log.Fatal(err)

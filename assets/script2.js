@@ -9,10 +9,6 @@ formE1.addEventListener('submit', (event) => {
 
     fetch('/sendData', {
         method: 'POST',
-        // headers: {
-        //     'Content-Type': 'multipart/form-data'
-        //     // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
         body: data
     }).then(res => res.json())
         .then(data => console.log(data))

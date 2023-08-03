@@ -1,10 +1,10 @@
-const form = document.getElementById('employee_form')
+const formE1 = document.getElementById('employee_form')
 const phone = document.getElementById('phone')
 const resume = document.getElementById('resume')
 const email = document.getElementById('email')
 const errorElement = document.getElementById('error')
 
-form.addEventListener('submit', (e) => {
+formE1.addEventListener('submit', (e) => {
 
     let error_messages = []
 
@@ -56,52 +56,17 @@ form.addEventListener('submit', (e) => {
         errorElement.style.height = "10px";
     }
 
-    // Submitting Form
-    form.addEventListener("submit", handleFormSubmit);
+    e.preventDefault();
 
-    async function handleFormSubmit(event) {
+    const data = new FormData(formE1);
+    data.append("Resume", resume.files[0]);
 
-        console.log("WORKING GOOOD")
-        event.preventDefault();
-
-        const form = event.currentTarget;
-
-        const url = form.action;
-
-        try {
-            const formData = new FormData(form);
-            const responseData = await postFormDataAsJson({ url, formData });
-            console.log({ responseData });
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-
-    async function postFormDataAsJson({ url, formData }) {
-        const plainFormData = Object.fromEntries(formData.entries());
-        const formDataJsonString = JSON.stringify(plainFormData);
-
-        const fetchOptions = {
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-
-            body: formDataJsonString,
-        };
-
-        const response = await fetch(url, fetchOptions);
-
-        if (!response.ok) {
-            const errorMessage = await response.text();
-            throw new Error(errorMessage);
-        }
-
-        return response.json();
-    }
+    fetch('/sendData', {
+        method: 'POST',
+        body: data
+    }).then(res => res.json())
+        .then(data => console.log(data))
+        .then(error => console.log(error))
 
 })
 
