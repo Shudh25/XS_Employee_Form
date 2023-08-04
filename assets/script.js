@@ -3,6 +3,7 @@ const phone = document.getElementById('phone')
 const resume = document.getElementById('resume')
 const email = document.getElementById('email')
 const errorElement = document.getElementById('error')
+const submitRes = document.getElementById('submitRes')
 
 formE1.addEventListener('submit', (e) => {
 
@@ -83,4 +84,5 @@ formE1.addEventListener('submit', (e) => {
 
 
 })
+
 
