@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="img/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <title>Xenonstack | Employee</title>
+    <title>Xenonstack | Employee Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -35,25 +35,25 @@
 
                 <div class="item">
                     <label for="date" style="display: block;">Date<span>*</span></label>
-                    <input type="date" class="inpt date" id="startDate" name="startDate">
+                    <input type="date" class="inpt date" id="startDate" name="startDate" required>
                     <em>to</em>
-                    <input type="date" class="inpt date" id="tillDate" name="tillDate">
+                    <input type="date" class="inpt date" id="tillDate" name="tillDate" required>
                 </div>
 
                 <div class="item">
                     <label for="mobile">Mobile Number<span>*</span></label><br>
                     <input type="tel" value="+91" maxlength="4" id="noAdd91" readonly>
-                    <input type="tel" id="phone" name="phone" maxlength="10">
+                    <input type="tel" id="phone" name="phone" maxlength="10" required>
                 </div>
 
                 <div class="item">
                     Upload Resume<span>*</span>
-                    <input type="file" class="inpt" id="resume" name="resume">
+                    <input type="file" class="inpt" id="resume" name="resume" required>
                 </div>
 
                 <div class="item">
                     <label for="email">Email<span>*</span></label>
-                    <input type="email" class="inpt" name="email" id="email" placeholder="xyz@gmail.com">
+                    <input type="email" class="inpt" name="email" id="email" placeholder="xyz@gmail.com" required>
                 </div>
             </div>
 
@@ -65,8 +65,7 @@
             <div id="submitRes" align="center" style="color: #2567ce;font-weight: bold;"></div>
         </form>
     </div>
-    <!-- <script src="script.js"></script> -->
-    <script src="script2.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
