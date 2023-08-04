@@ -66,6 +66,20 @@ func GET(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, Employee_details)
 }
 
+func GetFile(c *gin.Context) {
+	fileName := c.Param("file")
+	fmt.Println(fileName)
+	filePath := filepath.Join("uploads", fileName)
+	fmt.Println(filePath)
+
+	// Set the headers for the file transfer and return the file
+	c.Header("Content-Description", "File Transfer")
+	c.Header("Content-Transfer-Encoding", "binary")
+	c.Header("Content-Disposition", fmt.Sprintf("attachment; filename=%s", fileName))
+	c.File(filePath)
+}
+
+
 func POST(c *gin.Context) {
 	// Fname := c.PostForm("fname")
 

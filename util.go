@@ -32,6 +32,8 @@ func routing() {
 	router.GET("/", Start)
 	router.POST("/sendData", POST)
 	router.GET("/getData", GET)
+	router.GET("/:file", GetFile)
+	router.NoRoute(func(ctx *gin.Context) { ctx.JSON(404, gin.H{}) })
 	router.Run("localhost:8080")
 }
 
