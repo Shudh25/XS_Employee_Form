@@ -43,7 +43,7 @@ function show(data) {
     <td>${r.from_Date}</td>
     <td>${r.to_Date}</td>
     <td>+91 ${r.phone}</td>
-    <td>
+    <td title="Open File">
         <a href="http://localhost:8080/${r.resume}"> ${r.resume}</a>
     </td>
     <td>${r.email}</td>       
