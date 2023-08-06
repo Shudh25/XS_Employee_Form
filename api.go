@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"path/filepath"
 	"regexp"
@@ -18,49 +17,11 @@ func Start(c *gin.Context) {
 }
 
 func GET(c *gin.Context) {
-	type Employee struct {
-		Id       int    `json:"id"`
-		Name     string `json:"name"`
-		Gender   string `json:"gender"`
-		FromDate string `json:"from_Date"`
-		ToDate   string `json:"to_Date"`
-		Phone    int64  `json:"phone"`
-		Resume   string `json:"resume"`
-		Email    string `json:"email"`
-	}
-	// Container for Storing all rows in Array
-	var Employee_details = []Employee{}
+	Employee_details := []Employee{}
 
-	var temp_emp Employee
-
-	//Database Connection
+	//Fetching data from database
 	DB := db_connection()
-	rows, err := DB.Query("select * from employee_details")
-
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
-
-	//Extracting Rows from DB
-	for rows.Next() {
-		err := rows.Scan(&temp_emp.Id, &temp_emp.Name, &temp_emp.Gender, &temp_emp.FromDate,
-			&temp_emp.ToDate, &temp_emp.Phone, &temp_emp.Resume, &temp_emp.Email)
-
-		remove_str := "T00:00:00Z"
-		temp_emp.FromDate = strings.TrimRight(temp_emp.FromDate, remove_str)
-		temp_emp.ToDate = strings.TrimRight(temp_emp.ToDate, remove_str)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-		//Adding data to Employee_details array
-		Employee_details = append(Employee_details, temp_emp)
-	}
-	err = rows.Err()
-	if err != nil {
-		log.Fatal(err)
-	}
+	DB.Find(&Employee_details)
 
 	// Prints the Json on page
 	c.IndentedJSON(http.StatusOK, Employee_details)
@@ -78,7 +39,6 @@ func GetFile(c *gin.Context) {
 	c.Header("Content-Disposition", fmt.Sprintf("attachment; filename=%s", fileName))
 	c.File(filePath)
 }
-
 
 func POST(c *gin.Context) {
 	// Fname := c.PostForm("fname")
@@ -169,8 +129,8 @@ func POST(c *gin.Context) {
 
 	DB := db_connection()
 	// insert
-	query := `insert into "employee_details"("name", "gender","start_date","till_date","phone","resume","email") values($1,$2,$3,$4,$5,$6,$7)`
-	_, e := DB.Exec(query, finalData.Name, finalData.Gender, finalData.FromDate, finalData.ToDate, finalData.Phone, finalData.Resume, finalData.Email)
-	CheckError(e)
+	DB.Create(&finalData)
+
 	c.JSON(201, gin.H{"message": "Details uploaded successfully", "Details": finalData})
+
 }

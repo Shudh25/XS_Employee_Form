@@ -1,17 +1,15 @@
 package main
 
 import (
-	"database/sql"
-	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 // Custom DATA TYPE STRUCTURE
-
 type Employee struct {
 	gorm.Model
 	Id       int       `json:"id" gorm:"primaryKey"`
@@ -38,23 +36,16 @@ func routing() {
 }
 
 // DATABASE CONNECTION
-const (
-	host     = "localhost"
-	user     = "postgres"
-	password = "lusifer25"
-	dbname   = "xenonstack_db"
-)
-
-func db_connection() (db *sql.DB) {
+func db_connection() (db *gorm.DB) {
 	//Connection String
-	psqlconn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=disable", host, user, password, dbname)
+	dsn := "host=localhost user=postgres password=lusifer25 dbname=api sslmode=disable TimeZone=Asia/Shanghai"
 
 	// Open database
-	db, err := sql.Open("postgres", psqlconn)
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	CheckError(err)
 
-	// close database
-	// defer db.Close()
+	db.AutoMigrate(&Employee{})
+
 	return db
 }
 
