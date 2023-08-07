@@ -61,7 +61,6 @@ function formValidation(e) {
         error_messages.push("Please enter valid email address.")
     }
 
-
     // Printing All error_messages
     if (error_messages.length > 0) {
         e.preventDefault()

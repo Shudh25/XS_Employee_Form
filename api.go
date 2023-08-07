@@ -62,15 +62,15 @@ func GET(c *gin.Context) {
 		log.Fatal(err)
 	}
 
-	// Prints the Json on page
+	// response  Json
 	c.IndentedJSON(http.StatusOK, Employee_details)
 }
 
 func GetFile(c *gin.Context) {
 	fileName := c.Param("file")
-	fmt.Println(fileName)
+	// fmt.Println(fileName)
 	filePath := filepath.Join("uploads", fileName)
-	fmt.Println(filePath)
+	// fmt.Println(filePath)
 
 	// Set the headers for the file transfer and return the file
 	c.Header("Content-Description", "File Transfer")
@@ -79,10 +79,7 @@ func GetFile(c *gin.Context) {
 	c.File(filePath)
 }
 
-
 func POST(c *gin.Context) {
-	// Fname := c.PostForm("fname")
-
 	// Extracting Values from submitted form
 	name := c.Request.FormValue("name")
 	gender := c.Request.FormValue("gender")
@@ -133,7 +130,7 @@ func POST(c *gin.Context) {
 	// Define the path where the file will be saved
 
 	filePath := filepath.Join("uploads", fileName)
-	fmt.Println(filePath)
+	// fmt.Println(filePath)
 	// Save the file to the defined path
 	if err := c.SaveUploadedFile(file, filePath); err != nil {
 		c.JSON(500, gin.H{"error": "Failed to save file"})
