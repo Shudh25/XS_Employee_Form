@@ -1,0 +1,48 @@
+Table employee {
+  id integer [pk]
+  name varchar(30)
+  gender varchar(5)
+  from_date date
+  to_date date
+  phone varchar(10)
+  resume OID
+  email varchar
+}
+
+// QUERY
+CREATE TABLE employee_details(
+	 emp_id SERIAL PRIMARY KEY,
+	 name VARCHAR(30),
+	 gender VARCHAR(5),
+	 start_date DATE,
+  	 till_date DATE,
+  	 phone VARCHAR(10),
+  	 resume OID,
+  	 email VARCHAR(25)	 
+);
+
+// INSERT QUERY
+INSERT INTO employee_details(
+	 name,
+	 gender,
+	 start_date,
+  	 till_date,
+  	 phone,
+  	 resume,
+  	 email)
+VALUES(
+	'Shudhansu Pandey',
+	'Male',
+	'2023-06-08',
+	'2026-06-08',
+	'7355573959',
+	'resume1',
+	'pandey@gmail.com'
+);
+
+ALTER TABLE employee_details 
+ALTER COLUMN gender TYPE VARCHAR(6);
+
+UPDATE employee_details
+SET resume = 'not uploaded' 
+WHERE emp_id = 1;
