@@ -18,6 +18,7 @@ func Start(c *gin.Context) {
 }
 
 func GET(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	type Employee struct {
 		Id       int    `json:"id"`
 		Name     string `json:"name"`
