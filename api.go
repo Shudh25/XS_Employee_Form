@@ -81,6 +81,7 @@ func GetFile(c *gin.Context) {
 }
 
 func POST(c *gin.Context) {
+	c.Header("Access-Control-Allow-Origin", "*")
 	// Extracting Values from submitted form
 	name := c.Request.FormValue("name")
 	gender := c.Request.FormValue("gender")
@@ -93,11 +94,12 @@ func POST(c *gin.Context) {
 	finalGender := gender
 
 	// number validation
-	resPhn, _ := regexp.MatchString(`((\+|\(|0)?\d{1,3})?((\s|\)|\-))?(\d{10})$`, phone)
-	if !resPhn {
-		c.JSON(400, gin.H{"error": "number not valid"})
-		return
-	}
+	// resPhn, _ := regexp.MatchString(`((\+|\(|0)?\d{1,3})?((\s|\)|\-))?(\d{10})$`, phone)
+	// if !resPhn {
+	// 	fmt.Println("phone is : " + phone)
+	// 	c.JSON(400, gin.H{"error": "Number is not valid "})
+	// 	return
+	// }
 
 	finalPhone, _ := strconv.ParseInt(phone, 10, 0)
 
